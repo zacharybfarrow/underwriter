@@ -130,3 +130,5 @@ dmypy.json
 
 # specific to this app
 config.py
+create_table.py
+settings.json
