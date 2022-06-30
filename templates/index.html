@@ -1,0 +1,40 @@
+{% extends "layout.html" %} 
+
+{% block title %} 
+    New Case
+{% endblock %} 
+
+{% block main %} 
+    <h1 class="text-center">Life Underwriter</h1>
+    <h6 class="text-center">Enter applicant information below to underwrite your case</h6>
+
+    <div class="mb-3">
+        <form action="/health_profile">
+            <label for="birthdayInput" class="form-label">Birthdate:</label>
+            <input type="date" class="form-control" id="birthdayInput">
+            <label for="sexInput" class="form-label">Sex</label>
+            <select class="form-select" id="sexInput">
+                <option>Please select...</option>
+                <option>Male</option>
+                <option>Female</option>
+            </select>
+            <label for="heightInput" class="form-label">Height (in feet and inches)</label>
+            <select class="form-select" id="heightInput">
+                <option>Please select...</option>
+                {% for row in height_list %} 
+                    <option>{{ row[0] }}</option>
+                {% endfor %}
+            </select>
+            <label for="weightInput" class="form-label">Weight (in Lbs)</label>
+            <input type="number" class="form-control" id="weightInput" min="0" max="999">
+            <label for="nicotineInput" class="form-label">Nicotine use (Last 12 months)</label>
+            <select class="form-select" id="nicotineInput">
+                <option>Please select...</option>
+                <option>No</option>
+                <option>Cigarettes</option>
+                <option>Other (vape, cigars, chew, other)</option>
+            </select>
+            <button action="submit">Submit</button>
+        </form>
+    </div>
+{% endblock %}
