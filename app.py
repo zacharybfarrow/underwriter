@@ -19,15 +19,18 @@ def index():
     form = IndexPageForm()
     if form.validate_on_submit():
         print("validated")
+        # Store user input in db
         case = store_case_data(form)
-        return redirect(url_for("health_profile", case=case))
+        # Send case data along with redirect
+        return redirect(url_for("health_hx", case=case))
 
+    # Institute some sort of error flashing
     else:
         print("did not validate")
         print(form.birthdate)
         print(form.errors)
         return render_template("index.html", form=form)
 
-@app.route("/health_profile", methods=["GET", "POST"])
-def health_profile():
-    return render_template("health_profile.html", case=request.args.get("case"))
+@app.route("/health_hx", methods=["GET", "POST"])
+def health_hx():
+    return render_template("health_hx.html", case=request.args.get("case"))
