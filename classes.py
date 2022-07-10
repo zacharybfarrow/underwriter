@@ -23,7 +23,7 @@ with Session(engine) as session:
     for row in session.execute(select(build_table.c.height)):
         height_list.append(row[0])
 
-dur_list = ["0-1", "1-2", "2-3", "3+"]
+dur_list = ["Less than 1 year ago", "1 - 2 years ago", "2 - 3 years ago", "3+ years ago"]
 
 # Form classes
 class IndexPageForm(FlaskForm):
