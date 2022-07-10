@@ -5,13 +5,63 @@
 {% endblock %} 
 
 {% block main %}
-    <div>
-        Current case data will go here
-    </div>
-
     <div class="mb-3">
-        <form method="POST" action="/">
-            The next set of forms will go here
+        <form method="POST" action="/health_hx">
+            {{ form.csrf_token }}
+            <div>
+                {{ form.heart_attack.label(class_="form-check-label") }}
+                {{ form.heart_attack(class_="form-check", id="heart_attack") }}
+            </div>
+            <div>
+                {{ form.heart_attack_dur.label(class_="form-label", id="heart_attack_dur_lbl", hidden="True") }}
+                {{ form.heart_attack_dur(class_="form-select", id="heart_attack_dur", hidden="True") }}
+            </div>
+            <div>
+                {{ form.stroke.label(class_="form-check-label") }}
+                {{ form.stroke(class_="form-check", id="stroke") }}
+            </div>
+            <div>
+                {{ form.stroke_dur.label(class_="form-label", id="stroke_dur_lbl", hidden="True") }}
+                {{ form.stroke_dur(class_="form-select", id="stroke_dur", hidden="True") }}
+            </div>
+            <div>
+                {{ form.tia.label(class_="form-check-label") }}
+                {{ form.tia(class_="form-check", id="tia") }}
+            </div>
+            <div>
+                {{ form.tia_dur.label(class_="form-label", id="tia_dur_lbl", hidden="True") }}
+                {{ form.tia_dur(class_="form-select", id="tia_dur", hidden="True") }}
+            </div>
+            <div>
+                {{ form.cardio_surgery.label(class_="form-check-label") }}
+                {{ form.cardio_surgery(class_="form-check", id="cardio_surgery") }}
+            </div>
+            <div>
+                {{ form.cardio_surgery_dur.label(class_="form-label", id="cardio_surgery_dur_lbl", hidden="True") }}
+                {{ form.cardio_surgery_dur(class_="form-select", id="cardio_surgery_dur", hidden="True") }}
+            </div>
+            <div>
+                {{ form.chf.label(class_="form-check-label") }}
+                {{ form.chf(class_="form-check") }}
+            </div>
+            <div>
+                {{ form.diabetes.label(class_="form-check-label") }}
+                {{ form.diabetes(class_="form-check", id="diabetes") }}
+            </div>
+                {{ form.insulin.label(class_="form-check-label", id="insulin_lbl", hidden="True") }}
+                {{ form.insulin(class_="form-check", id="insulin", hidden="True") }}
+            <div>
+                {{ form.insulin_dur.label(class_="form-label", id="insulin_dur_lbl", hidden="True") }}
+                {{ form.insulin_dur(class_="form-select", id="insulin_dur", hidden="True") }}
+            </div>
+            <div>
+                {{ form.complications.label(class="form-check-label", id="complications_lbl", hidden="True") }}
+                {{ form.complications(class_="form-check", id="complications", hidden="True") }}
+            </div>
+            <div>
+                {{ form.submit(class_="btn btn-primary")}}
+            </div>
         </form>
     </div>
+    <script type="text/javascript" src="/static/health_hx.js"></script>
 {% endblock %}
