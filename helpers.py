@@ -6,9 +6,9 @@ from config import user, password, host, database
 from classes import cases_table
 
 conn_str = f"postgresql+psycopg2://{user}:{password}@{host}/{database}"
-engine = create_engine(conn_str, echo=True, future=True)
+engine = create_engine(conn_str, echo=False, future=True)
 
-def store_case_data(form):
+def store_case_basics(form):
     with Session(engine) as session:
         insert_stmt = insert(cases_table).values(
             birthdate=form.birthdate.data,
@@ -25,4 +25,11 @@ def store_case_data(form):
         print("executing query")
         result = session.execute(insert_stmt)
         session.commit()
-        return result
+        for row in result:
+            print(row._mapping) # saving for later, may be useful to store dict in cookies for current case
+        return result           # this is returning a CursorResult object (memory location), not raw table data
+
+def store_case_health_hx(form):
+    with Session(engine) as session:
+        
+        return
