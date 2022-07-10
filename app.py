@@ -1,4 +1,4 @@
-from flask import Flask
+from flask import Flask, session
 from flask import render_template, request, redirect, url_for
 
 from sqlalchemy import create_engine
@@ -21,9 +21,8 @@ def index():
     if request.method == "POST":
         if form.validate_on_submit():
             print("basics validated")       # debug
-            # Store user input in db
-            case_id = store_case_basics(form)
-            print(case_id)
+            # Store user input in db, save case_id to cookies
+            session['current_case'] = store_case_basics(form)
             return redirect(url_for("health_hx"))
 
         # If form wasn't validated, handle errors
@@ -44,7 +43,7 @@ def health_hx():
         if form.validate_on_submit():
             print("health_hx validated")    # debug
             # Store case health history
-            store_case_health_hx(form)
+            store_case_health_hx(form, session['current_case'])
             return redirect(url_for("rx"))
             # Store user input in db
         

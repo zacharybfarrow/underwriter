@@ -9,6 +9,10 @@ conn_str = f"postgresql+psycopg2://{user}:{password}@{host}/{database}"
 engine = create_engine(conn_str, echo=False, future=True)
 
 def store_case_basics(form):
+    """Takes user input from the IndexPageForm and stores in DB, generating unique id for the current case.
+    Result is a CursorResult object that holds a row with all the inserted data.
+    Returns the newly created case_id to be stored in the session data."""
+
     with Session(engine) as session:
         insert_stmt = insert(cases_table).values(
             birthdate=form.birthdate.data,
