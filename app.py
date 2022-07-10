@@ -5,7 +5,7 @@ from sqlalchemy import create_engine
 
 from config import host, port, database, user, password, secret_key
 from classes import HealthHxForm, IndexPageForm
-from helpers import store_case_data
+from helpers import store_case_basics, store_case_health_hx
 
 conn_str = f"postgresql+psycopg2://{user}:{password}@{host}/{database}"
 engine = create_engine(conn_str, echo=True, future=True)
@@ -20,11 +20,10 @@ def index():
     # If form is being submitted
     if request.method == "POST":
         if form.validate_on_submit():
-            print("validated")
+            print("basics validated")       # debug
             # Store user input in db
-            case = store_case_data(form)
-            # Send case data along with redirect
-            return redirect(url_for("health_hx", case=case))
+            store_case_basics(form)
+            return redirect(url_for("health_hx"))
 
         # If form wasn't validated, handle errors
         elif not form.validate_on_submit():
@@ -38,12 +37,13 @@ def index():
 @app.route("/health_hx", methods=["GET", "POST"])
 def health_hx():
     form = HealthHxForm()
-
     # If form is being submitted
     if request.method == "POST":
         # Check for form validation
         if form.validate_on_submit():
-            print("health_hx validated")
+            print("health_hx validated")    # debug
+            # Store case health history
+            store_case_health_hx(form)
             return redirect(url_for("rx"))
             # Store user input in db
         
