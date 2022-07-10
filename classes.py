@@ -6,7 +6,7 @@ from sqlalchemy import insert, text, select
 from sqlalchemy.orm import Session
 
 from flask_wtf import FlaskForm
-from wtforms import DateField, SelectField, IntegerField, SubmitField, validators
+from wtforms import DateField, SelectField, IntegerField, SubmitField, BooleanField, validators
 from config import host, port, database, user, password
 
 conn_str = f"postgresql+psycopg2://{user}:{password}@{host}/{database}"
@@ -23,6 +23,8 @@ with Session(engine) as session:
     for row in session.execute(select(build_table.c.height)):
         height_list.append(row[0])
 
+dur_list = ["0-1", "1-2", "2-3", "3+"]
+
 # Form classes
 class IndexPageForm(FlaskForm):
     birthdate = DateField('Birthdate:', [validators.InputRequired()])
@@ -35,4 +37,20 @@ class IndexPageForm(FlaskForm):
         "No", 
         "Other (vape, chewing tobacco, cigars, etc)"
         ])
+    submit = SubmitField("Continue")
+
+class HealthHxForm(FlaskForm):
+    heart_attack = BooleanField('Heart Attack? ')
+    heart_attack_dur = SelectField('How many years ago?', choices=dur_list)
+    stroke = BooleanField('Stroke? ')
+    stroke_dur = SelectField('How many years ago?', choices=dur_list)
+    tia = BooleanField('TIA / Mini-Stroke? ')
+    tia_dur = SelectField('How many years ago?', choices=dur_list)
+    cardio_surgery = BooleanField('Heart or circulatory surgery/procedure: ')
+    cardio_surgery_dur = SelectField('How many years ago?', choices=dur_list)
+    chf = BooleanField('Congestive Heart Failure? ')
+    diabetes = BooleanField('Diabetes? ')
+    insulin = BooleanField('Insulin use? ')
+    complications = BooleanField('Complications of diabetes? ')
+    insulin_dur = SelectField('Last used insulin? ', choices=dur_list)
     submit = SubmitField("Continue")
