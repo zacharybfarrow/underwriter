@@ -59,6 +59,28 @@
                 {{ form.complications(class_="form-check", id="complications", hidden="True") }}
             </div>
             <div>
+                {{ form.cancer.label(class_="form-check-label") }}
+                {{ form.cancer(class_="form-check", id="cancer") }}
+            </div>
+            <div id="cancer_more" hidden="True">
+                <div>
+                    {{ form.cancer_type.label(class_="form-label", id="cancer_type_lbl") }}
+                    {{ form.cancer_type(class_="form-select", id="cancer_type") }}
+                </div>
+                <div>
+                    {{ form.cancer_dur.label(class_="form-label", id="cancer_dur_lbl") }}
+                    {{ form.cancer_dur(class_="form-select", id="cancer_dur") }}
+                </div>
+                <div>
+                    {{ form.cancer_multi.label(class_="form-check-label", id="cancer_multi_lbl") }}
+                    {{ form.cancer_multi(class_="form-check", id="cancer_multi") }}
+                </div>
+                <div>
+                    {{ form.cancer_recur.label(class_="form-check-label", id="cancer_recur_lbl") }}
+                    {{ form.cancer_recur(class_="form-check", id="cancer_recur") }}
+                </div>
+            </div>
+            <div>
                 {{ form.submit(class_="btn btn-primary")}}
             </div>
         </form>
