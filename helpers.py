@@ -16,6 +16,7 @@ def store_case_basics(form):
             height=form.height.data,
             weight=form.weight.data,
             nicotine=form.nicotine.data).returning(
+            cases_table.c.case_id,
             cases_table.c.birthdate,
             cases_table.c.gender,
             cases_table.c.height,
@@ -23,13 +24,14 @@ def store_case_basics(form):
             cases_table.c.nicotine
         )
         print("executing query")
-        result = session.execute(insert_stmt)
-        session.commit()
+        result = session.execute(insert_stmt)   # this is returning a CursorResult object (memory location), not raw table data
+        case_id = 0                             # declaring variable to store case_id
         for row in result:
-            print(row._mapping) # saving for later, may be useful to store dict in cookies for current case
-        return result           # this is returning a CursorResult object (memory location), not raw table data
+            case_id = row._mapping["case_id"]   # row._mapping gives you a dict of column names and row data
+        session.commit()
+        return case_id           
 
-def store_case_health_hx(form):
+def store_case_health_hx(form, case_id):
     with Session(engine) as session:
-        
+
         return

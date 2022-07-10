@@ -22,7 +22,8 @@ def index():
         if form.validate_on_submit():
             print("basics validated")       # debug
             # Store user input in db
-            store_case_basics(form)
+            case_id = store_case_basics(form)
+            print(case_id)
             return redirect(url_for("health_hx"))
 
         # If form wasn't validated, handle errors
