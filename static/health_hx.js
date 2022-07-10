@@ -5,7 +5,7 @@ let cardio_surgery_q = document.getElementById("cardio_surgery")
 let diabetes_q = document.getElementById("diabetes")
 let insulin_q = document.getElementById("insulin")
 
-// Event handler function to toggle hidden status of each duratioin select field
+// Event handler function to toggle hidden status of each duration select field
 function switch_hidden(event, label_id, field_id) {
     let label = document.getElementById(label_id)
     let field = document.getElementById(field_id)
