@@ -35,7 +35,12 @@ def store_case_basics(form):
         session.commit()
         return case_id           
 
-def store_case_health_hx(form, case_id):
+def store_case_dx(form, case_id):
     with Session(engine) as session:
-
+        # update dx column of cases db for our case id
+        # check to see if value of column is null (as in no diagnoses currently in db)
+        # if so, use insert statement
+        
+        # if value not null,
+        # use array_append - will need sqlalchemy text method I think
         return
